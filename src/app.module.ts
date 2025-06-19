@@ -4,6 +4,9 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/user.entity';
+import { KitoneModule } from './kitone/kitone.module';
+import { StudentsModule } from './students/students.module';
+
 
 @Module({
   imports: [UsersModule,
@@ -12,11 +15,14 @@ import { User } from './users/entities/user.entity';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'root',
+      password: '',
       database: 'test',
       entities: [User],
       synchronize: true,
-    })
+    }),
+    KitoneModule,
+    StudentsModule,
+
   ],
   controllers: [AppController],
   providers: [AppService],
