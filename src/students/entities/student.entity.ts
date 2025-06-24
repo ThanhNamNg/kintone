@@ -1,7 +1,7 @@
 import { Column, PrimaryGeneratedColumn } from "typeorm";
 
 export class Student {
-    @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column() maSV: string;
@@ -9,7 +9,7 @@ export class Student {
   @Column() email: string;
 
   @Column() khoa: string;
-@Column() ngaySinh: string;
+  @Column() ngaySinh: string;
   @Column() lop: string;
   @Column() diaChi: string;
   @Column() sdt: string;

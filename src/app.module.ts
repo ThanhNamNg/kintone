@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/user.entity';
-import { KitoneModule } from './kitone/kitone.module';
+
 import { StudentsModule } from './students/students.module';
 
 
@@ -20,7 +20,7 @@ import { StudentsModule } from './students/students.module';
       entities: [User],
       synchronize: true,
     }),
-    KitoneModule,
+    
     StudentsModule,
 
   ],

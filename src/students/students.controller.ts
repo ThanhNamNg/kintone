@@ -16,7 +16,8 @@ export class StudentsController {
 
   @Get()
   findAll() {
-    return this.studentsService.findAll();
+
+    return this.studentsService.getDataFromKintone();
   }
 
   @Get(':id')
