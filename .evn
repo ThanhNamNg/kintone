@@ -2,3 +2,5 @@ npm run start:dev
 
 
 curl -X GET "https://qmmtawzjw7cs.kintone.com/k/v1/records.json?app=8" -H "X-Cybozu-API-Token: PisBx8JPEucIAfAUCxcVPJcEtl1joFN7UEQVpnyQ"
+\
+curl --ssl-no-revoke -H "X-Cybozu-API-Token: PisBx8JPEucIAfAUCxcVPJcEtl1joFN7UEQVpnyQ" "https://qmmtawzjw7cs.kintone.com/k/v1/records.json?app=8"

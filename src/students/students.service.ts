@@ -17,36 +17,33 @@ export class StudentsService {
   constructor(
     @InjectRepository(Student)
     private recordRepo: Repository<Student>,
-  ) {}
+  ) { }
 
   async getDataFromKintone() {
     try {
-      const response = await axios.get(this.KINTONE_BASE_URL, {
-        headers: {
-          'X-Cybozu-API-Token': this.API_TOKEN,
-          'Content-Type': 'application/json',
+      const response = await axios.get(
+        `https://qmmtawzjw7cs.kintone.com/k/v1/records.json`,
+        {
+          headers: {
+            'X-Cybozu-API-Token': this.API_TOKEN,
+          },
+          params: {
+            app: this.APP_ID,
+            query: '', // có thể bỏ nếu muốn lấy tất cả
+          },
+          httpsAgent: new https.Agent({ rejectUnauthorized: false }),
         },
-        params: {
-          app: this.APP_ID,
-        },
-        httpsAgent: new https.Agent({ rejectUnauthorized: false }), // Bỏ qua kiểm tra SSL
-      });
-
-      // ✅ Log kiểm tra: Xem có dữ liệu hay không
-      console.log('✅ Dữ liệu lấy từ Kintone:', response.data.records);
-
-      return response.data.records;
+      );
+      return response.data;
     } catch (error) {
-      // ❌ In ra lỗi chi tiết nếu gọi thất bại
-      console.error('❌ Không lấy được dữ liệu từ Kintone:');
-      if (error.response) {
-        console.error('Status:', error.response.status);
-        console.error('Data:', error.response.data);
+      if (axios.isAxiosError(error)) {
+        console.error('❌ Axios Error:', error.response?.status);
+        console.error('❌ Axios Response:', JSON.stringify(error.response?.data, null, 2));
       } else {
-        console.error('Message:', error.message);
+        console.error('❌ Unknown Error:', error);
       }
-      throw error;
     }
+
   }
 
   create(createStudentDto: CreateStudentDto) {
