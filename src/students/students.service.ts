@@ -34,7 +34,25 @@ export class StudentsService {
           httpsAgent: new https.Agent({ rejectUnauthorized: false }),
         },
       );
-      return response.data;
+      const records =  response.data.records;
+      const students :Student[]= records.map((studentOfArr)=>{
+       // console.log(studentOfArr);
+        const student = new Student();
+        student.maSV = studentOfArr.maSV?.value||'';
+        return student;
+
+      })
+      const data = await this.recordRepo.create(students);
+      try {
+        console.log(students[1]);
+      
+       return await this.recordRepo.save(data);
+      } catch (error) {
+        throw error;
+      }
+   
+
+
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error('❌ Axios Error:', error.response?.status);
